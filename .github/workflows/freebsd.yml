@@ -52,15 +52,13 @@ jobs:
 
           if [ "$REF_VERSION" == "$RUST_VERSION" ]; then
             echo "Same version"
-            echo "same_version=true" >> "$GITHUB_OUTPUT"
+            echo "same_version=true" >> "$GITHUB_ENV"
           else
             echo "Different versions"
-            echo "same_version=false" >> "$GITHUB_OUTPUT"
+            echo "same_version=false" >> "$GITHUB_ENV"
           fi
 
     - name: Compare versions
-      env:
-        SAME_VERSION: ${{ steps.rust-version.outputs.same_version }}
-      if: env.SAME_VERSION
+      if: env.same_version == 'true'
       run: |
-        printf 'same_version = %s\n' "$SAME_VERSION"
+        printf 'same_version = %s\n' "$same_version"
