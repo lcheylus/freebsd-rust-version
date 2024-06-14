@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: FreeBSD VM
+    - name: Get FreeBSD Rust version
       id: rust-version
       uses: vmactions/freebsd-vm@v1.0.7
       with:
@@ -61,15 +61,19 @@ jobs:
             rustc -vV > freebsd_rust_version.txt
           fi
 
-    - name: Commit Rust version
-      id: commit-version
-      if: env.SAME_VERSION == 'false'
+    - name: Dump Rust version
+      id: dump-version
       run: |
         echo "Rust version = $RUST_VERSION"
         echo
         cat freebsd_rust_version.txt
+
+    # - name: Commit Rust version
+    #   id: commit-version
+    #   if: env.SAME_VERSION == 'false'
       # uses: EndBug/add-and-commit@v9
       # with:
       #   add: freebsd_rust_version.txt --force
       #   default_author: github_actor
-      #   message: xxx
+      #   message: 'Update FreeBSD Rust version ${{ env.RUST_VERSION }}'
+      #   tag: ${{ env.RUST_VERSION }}
