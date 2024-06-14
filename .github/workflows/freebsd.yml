@@ -52,13 +52,13 @@ jobs:
 
           if [ "$REF_VERSION" == "$RUST_VERSION" ]; then
             echo "Same version"
-            echo "same_version=true" >> "$GITHUB_ENV"
+            echo "SAME_VERSION=true" >> "$GITHUB_ENV"
           else
             echo "Different versions"
-            echo "same_version=false" >> "$GITHUB_ENV"
+            echo "SAME_VERSION=false" >> "$GITHUB_ENV"
           fi
 
     - name: Compare versions
-      if: env.same_version == 'true'
+      if: env.SAME_VERSION == 'true'
       run: |
-        printf 'same_version = %s\n' "$same_version"
+        printf 'same_version = %s\n' "$SAME_VERSION"
