@@ -48,3 +48,9 @@ jobs:
 
           echo "REF_VERSION = ${REF_VERSION}"
           echo "RUST_VERSION = ${RUST_VERSION}"
+
+          if [ "$REF_VERSION" == "$RUST_VERSION" ]; then
+            echo "Same version"
+          else
+            echo "Different versions"
+          fi
