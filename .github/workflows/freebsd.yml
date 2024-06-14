@@ -1,0 +1,39 @@
+name: FreeBSD
+
+on:
+  # To run manually workflow
+  workflow_dispatch:
+
+jobs:
+  rust-version:
+    name: Get Rust version
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+    # - uses: actions/checkout@v4
+
+    - name: FreeBSD VM
+      uses: vmactions/freebsd-vm@v1.0.7
+      with:
+        usesh: true
+        sync: rsync
+        copyback: true
+        prepare: pkg install -y curl bash
+        run: |
+          set -e
+
+          echo "## OS infos"
+          uname -a
+
+          echo "## Install Rust toolchain"
+          export CARGO_TERM_COLOR=always
+          curl https://sh.rustup.rs -sSf --output rustup.sh
+          sh rustup.sh -y --profile=minimal -t stable
+          . "${HOME}"/.cargo/env
+          rm rustup.sh
+
+          echo "## Rust infos"
+          rustc -vV
+          echo "## cargo infos"
+          cargo -vV
