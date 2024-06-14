@@ -37,12 +37,15 @@ jobs:
           . "${HOME}"/.cargo/env
           rm rustup.sh
 
+          echo
           echo "## Rust infos"
           rustc -vV
+          echo
           echo "## cargo infos"
           cargo -vV
 
           # Compare Rust versions
+          echo
           echo "## Compare Rust versions"
           REF_VERSION=$(grep -E "^rustc" freebsd_rust_version.txt | cut -d" " -f2)
           RUST_VERSION=$(rustc -vV | grep -E "^rustc" | cut -d" " -f2)
@@ -51,14 +54,22 @@ jobs:
           echo "RUST_VERSION = ${RUST_VERSION}"
 
           if [ "$REF_VERSION" == "$RUST_VERSION" ]; then
-            echo "Same version"
             echo "SAME_VERSION=true" >> "$GITHUB_ENV"
           else
-            echo "Different versions"
             echo "SAME_VERSION=false" >> "$GITHUB_ENV"
+            echo "RUST_VERSION=${RUST_VERSION}" >> "$GITHUB_ENV"
+            rustc -vV > freebsd_rust_version.txt
           fi
 
-    - name: Compare versions
-      if: env.SAME_VERSION == 'true'
+    - name: Commit Rust version
+      id: commit-version
+      if: env.SAME_VERSION == 'false'
       run: |
-        printf 'same_version = %s\n' "$SAME_VERSION"
+        echo "Rust version = $RUST_VERSION"
+        echo
+        cat freebsd_rust_version.txt
+      # uses: EndBug/add-and-commit@v9
+      # with:
+      #   add: freebsd_rust_version.txt --force
+      #   default_author: github_actor
+      #   message: xxx
