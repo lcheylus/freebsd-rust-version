@@ -37,15 +37,15 @@ jobs:
           . "${HOME}"/.cargo/env
           rm rustup.sh
 
-          echo
+          printf "\n"
           echo "## Rust infos"
           rustc -vV
-          echo
+          printf "\n"
           echo "## cargo infos"
           cargo -vV
 
           # Compare Rust versions
-          echo
+          printf "\n"
           echo "## Compare Rust versions"
           REF_VERSION=$(grep -E "^rustc" freebsd_rust_version.txt | cut -d" " -f2)
           RUST_VERSION=$(rustc -vV | grep -E "^rustc" | cut -d" " -f2)
