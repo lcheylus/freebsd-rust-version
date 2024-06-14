@@ -1,4 +1,4 @@
-name: FreeBSD
+name: FreeBSD Rust version
 
 on:
   # To run manually workflow
@@ -17,6 +17,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: FreeBSD VM
+      id: rust-version
       uses: vmactions/freebsd-vm@v1.0.7
       with:
         usesh: true
@@ -51,6 +52,14 @@ jobs:
 
           if [ "$REF_VERSION" == "$RUST_VERSION" ]; then
             echo "Same version"
+            echo "same_version=true" >> "$GITHUB_OUTPUT"
           else
             echo "Different versions"
+            echo "same_version=false" >> "$GITHUB_OUTPUT"
           fi
+
+    - name: Compare versions
+      env:
+        SAME_VERSION: ${{ steps.rust-version.outputs.same_version }}
+      run: |
+        printf 'same_version = %s\n' "$SAME_VERSION"
