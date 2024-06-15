@@ -2,14 +2,18 @@ name: FreeBSD Rust version
 
 on:
   # To run manually workflow
-  workflow_dispatch
+  workflow_dispatch:
+
+  # Schedule workflow
+  schedule:
+    - cron: "5 * * * *"
 
 permissions:
   contents: write
 
 jobs:
   rust-version:
-    name: Get Rust version
+    name: Get FreeBSD Rust version
     runs-on: ubuntu-latest
     timeout-minutes: 90
 
@@ -57,11 +61,11 @@ jobs:
             echo "SAME_VERSION=true" >> "$GITHUB_ENV"
           else
             echo "SAME_VERSION=false" >> "$GITHUB_ENV"
-            echo "RUST_VERSION=${RUST_VERSION}" >> "$GITHUB_ENV"
             rustc -vV > freebsd_rust_version.txt
           fi
+          echo "RUST_VERSION=${RUST_VERSION}" >> "$GITHUB_ENV"
 
-    - name: Dump Rust version
+    - name: Dump FreeBSD Rust version
       id: dump-version
       run: |
         echo "Rust version = $RUST_VERSION"
@@ -73,7 +77,7 @@ jobs:
         printf "\n"
         cat freebsd_rust_version.txt
 
-    - name: Commit Rust version
+    - name: Commit FreeBSD Rust version
       id: commit-version
       if: env.SAME_VERSION == 'false'
       uses: EndBug/add-and-commit@v9
