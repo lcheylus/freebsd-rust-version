@@ -65,6 +65,11 @@ jobs:
       id: dump-version
       run: |
         echo "Rust version = $RUST_VERSION"
+        if $SAME_VERSION; then
+          echo "No need to commit new Rust version"
+        else
+          echo "Rust version changed => need to commit it"
+        fi
         echo
         cat freebsd_rust_version.txt
 
