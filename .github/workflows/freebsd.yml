@@ -70,15 +70,15 @@ jobs:
         else
           echo "Rust version changed => need to commit it"
         fi
-        echo
+        printf "\n"
         cat freebsd_rust_version.txt
 
-    # - name: Commit Rust version
-    #   id: commit-version
-    #   if: env.SAME_VERSION == 'false'
-      # uses: EndBug/add-and-commit@v9
-      # with:
-      #   add: freebsd_rust_version.txt --force
-      #   default_author: github_actor
-      #   message: 'Update FreeBSD Rust version ${{ env.RUST_VERSION }}'
-      #   tag: ${{ env.RUST_VERSION }}
+    - name: Commit Rust version
+      id: commit-version
+      if: env.SAME_VERSION == 'false'
+      uses: EndBug/add-and-commit@v9
+      with:
+        add: freebsd_rust_version.txt
+        default_author: github_actor
+        message: 'Update for FreeBSD Rust version ${{ env.RUST_VERSION }}'
+        tag: ${{ env.RUST_VERSION }}
