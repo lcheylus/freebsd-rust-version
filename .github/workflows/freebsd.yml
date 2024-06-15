@@ -2,10 +2,10 @@ name: FreeBSD Rust version
 
 on:
   # To run manually workflow
-  workflow_dispatch:
+  workflow_dispatch
 
 permissions:
-  contents: read # to fetch code (actions/checkout)
+  contents: write
 
 jobs:
   rust-version:
