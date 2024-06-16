@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Get FreeBSD Rust version
-      id: rust-version
+      id: get-rust-version
       uses: vmactions/freebsd-vm@v1.0.7
       with:
         usesh: true
