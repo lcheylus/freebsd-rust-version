@@ -22,7 +22,7 @@ jobs:
 
     - name: Get FreeBSD Rust version
       id: get-rust-version
-      uses: vmactions/freebsd-vm@v1.0.9
+      uses: vmactions/freebsd-vm@v1.1.0
       with:
         usesh: true
         sync: rsync
