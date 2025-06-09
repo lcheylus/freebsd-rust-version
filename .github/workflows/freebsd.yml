@@ -22,17 +22,19 @@ jobs:
 
     - name: Get FreeBSD Rust version
       id: get-rust-version
-      uses: vmactions/freebsd-vm@v1.2.0
+      uses: cross-platform-actions/action@v0.28.0
       with:
-        usesh: true
-        sync: rsync
-        copyback: true
-        prepare: pkg install -y curl bash
+        operating_system: freebsd
+        version: '14.2'
+        shell: sh
+        sync_files: true
         run: |
           set -e
 
           echo "## OS infos"
           uname -a
+
+          pkg install -y curl bash
 
           echo "## Install Rust toolchain"
           export CARGO_TERM_COLOR=always
