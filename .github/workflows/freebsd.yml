@@ -34,8 +34,6 @@ jobs:
           echo "## OS infos"
           uname -a
 
-          sudo pkg install -y curl
-
           echo "## Install Rust toolchain"
           export CARGO_TERM_COLOR=always
           curl https://sh.rustup.rs -sSf --output rustup.sh
