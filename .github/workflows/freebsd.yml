@@ -34,7 +34,7 @@ jobs:
           echo "## OS infos"
           uname -a
 
-          pkg install -y curl bash
+          sudo pkg install -y curl bash
 
           echo "## Install Rust toolchain"
           export CARGO_TERM_COLOR=always
