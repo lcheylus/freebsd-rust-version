@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 90
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
 
     - name: Get FreeBSD Rust version
       id: get-rust-version
