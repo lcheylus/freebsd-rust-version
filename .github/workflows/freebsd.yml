@@ -71,8 +71,10 @@ jobs:
         echo "Rust version = $RUST_VERSION"
         if $SAME_VERSION; then
           echo "No need to commit new Rust version"
+          echo "**Current Rust version:** $RUST_VERSION" >> $GITHUB_STEP_SUMMARY
         else
           echo "Rust version changed => need to commit it"
+          echo "**New Rust version:** $RUST_VERSION" >> $GITHUB_STEP_SUMMARY
         fi
         printf "\n"
         cat freebsd_rust_version.txt
