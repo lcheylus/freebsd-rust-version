@@ -22,7 +22,7 @@ jobs:
 
     - name: Get FreeBSD Rust version
       id: get-rust-version
-      uses: cross-platform-actions/action@v0.30.0
+      uses: cross-platform-actions/action@v0.31.0
       with:
         operating_system: freebsd
         version: '14.3'
