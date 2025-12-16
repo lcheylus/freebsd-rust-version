@@ -8,6 +8,9 @@ on:
   schedule:
     - cron: "0 11,23 * * *"
 
+env:
+  FREEBSD_VERSION: '15.0'
+
 permissions:
   contents: write
 
@@ -25,7 +28,7 @@ jobs:
       uses: cross-platform-actions/action@v0.31.0
       with:
         operating_system: freebsd
-        version: '15.0'
+        version: ${{ env.FREEBSD_VERSION }}
         shell: sh
         sync_files: true
         run: |
