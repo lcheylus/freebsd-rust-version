@@ -25,7 +25,7 @@ jobs:
 
     - name: Get FreeBSD Rust version
       id: get-rust-version
-      uses: cross-platform-actions/action@v0.31.0
+      uses: cross-platform-actions/action@v0.32.0
       with:
         operating_system: freebsd
         version: ${{ env.FREEBSD_VERSION }}
