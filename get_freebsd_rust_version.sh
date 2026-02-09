@@ -17,15 +17,15 @@ sh rustup.sh -y --profile=minimal -t stable
 . "${HOME}"/.cargo/env
 rm rustup.sh
 
-printf "\n\n"
+printf "\n"
 echo "### Rust infos"
 rustc -vV
-printf "\n\n"
+printf "\n"
 echo "### cargo infos"
 cargo -vV
 
 # Compare Rust versions
-printf "\n\n"
+printf "\n"
 echo "### Compare Rust versions"
 REF_VERSION=$(grep -E "^rustc" freebsd_rust_version.txt | cut -d" " -f2)
 RUST_VERSION=$(rustc -vV | grep -E "^rustc" | cut -d" " -f2)
