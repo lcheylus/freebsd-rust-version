@@ -33,40 +33,7 @@ jobs:
         sync_files: true
         run: |
           set -e
-
-          echo "## OS infos"
-          uname -a
-
-          echo "## Install Rust toolchain"
-          export CARGO_TERM_COLOR=always
-          curl https://sh.rustup.rs -sSf --output rustup.sh
-          sh rustup.sh -y --profile=minimal -t stable
-          . "${HOME}"/.cargo/env
-          rm rustup.sh
-
-          printf "\n"
-          echo "## Rust infos"
-          rustc -vV
-          printf "\n"
-          echo "## cargo infos"
-          cargo -vV
-
-          # Compare Rust versions
-          printf "\n"
-          echo "## Compare Rust versions"
-          REF_VERSION=$(grep -E "^rustc" freebsd_rust_version.txt | cut -d" " -f2)
-          RUST_VERSION=$(rustc -vV | grep -E "^rustc" | cut -d" " -f2)
-
-          echo "REF_VERSION = ${REF_VERSION}"
-          echo "RUST_VERSION = ${RUST_VERSION}"
-
-          if [ "$REF_VERSION" == "$RUST_VERSION" ]; then
-            echo "SAME_VERSION=true" >> "$GITHUB_ENV"
-          else
-            echo "SAME_VERSION=false" >> "$GITHUB_ENV"
-            rustc -vV > freebsd_rust_version.txt
-          fi
-          echo "RUST_VERSION=${RUST_VERSION}" >> "$GITHUB_ENV"
+          sh get_freebsd_rust_version.sh
 
     - name: Dump FreeBSD Rust version
       id: dump-version
