@@ -1,7 +1,7 @@
-rustc 1.93.0 (254b59607 2026-01-19)
+rustc 1.93.1 (01f6ddf75 2026-02-11)
 binary: rustc
-commit-hash: 254b59607d4417e9dffbc307138ae5c86280fe4c
-commit-date: 2026-01-19
+commit-hash: 01f6ddf7588f42ae2d7eb0a2f21d44e8e96674cf
+commit-date: 2026-02-11
 host: x86_64-unknown-freebsd
-release: 1.93.0
+release: 1.93.1
 LLVM version: 21.1.8
