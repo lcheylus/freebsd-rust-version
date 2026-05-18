@@ -23,17 +23,20 @@ jobs:
     steps:
     - uses: actions/checkout@v6
 
-    - name: Get FreeBSD Rust version
-      id: get-rust-version
+    - name: Start FreeBSD VM
+      id: start-freebsd
       uses: cross-platform-actions/action@v1.1.0
       with:
         operating_system: freebsd
         version: ${{ env.FREEBSD_VERSION }}
-        shell: sh
         sync_files: true
-        run: |
-          set -e
-          sh get_freebsd_rust_version.sh
+
+    - name: Get FreeBSD Rust version
+      id: get-rust-version
+      shell: cpa.sh {0}
+      run: |
+        set -e
+        sh get_freebsd_rust_version.sh
 
     - name: Dump FreeBSD Rust version
       id: dump-version
