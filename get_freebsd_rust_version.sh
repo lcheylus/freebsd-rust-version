@@ -6,27 +6,26 @@ set -e
 # First, we check that this script is not run as root.
 if [ "root" == "$(whoami)" ]; then exit 1; fi
 
-echo "### OS infos"
+echo "::group::OS infos"
 uname -a
+echo "::endgroup::"
 
-printf "\n"
-echo "### Install Rust toolchain"
+echo "::group::Install Rust toolchain"
 export CARGO_TERM_COLOR=always
 curl https://sh.rustup.rs -sSf --output rustup.sh
 sh rustup.sh -y --profile=minimal -t stable
 . "${HOME}"/.cargo/env
 rm rustup.sh
+echo "::endgroup::"
 
-printf "\n"
-echo "### Rust infos"
+echo "::group::Rust/cargo infos"
 rustc -vV
 printf "\n"
-echo "### cargo infos"
 cargo -vV
+echo "::endgroup::"
 
 # Compare Rust versions
-printf "\n"
-echo "### Compare Rust versions"
+echo "::group::Compare Rust versions"
 REF_VERSION=$(grep -E "^rustc" freebsd_rust_version.txt | cut -d" " -f2)
 RUST_VERSION=$(rustc -vV | grep -E "^rustc" | cut -d" " -f2)
 
@@ -40,4 +39,4 @@ else
 	rustc -vV > freebsd_rust_version.txt
 fi
 echo "RUST_VERSION=${RUST_VERSION}" >> "$GITHUB_ENV"
-
+echo "::endgroup::"
