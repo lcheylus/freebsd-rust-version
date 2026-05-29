@@ -11,5 +11,5 @@ needed.
 - Run a FreeBSD VM via [cross-platform-actions/action](https://github.com/cross-platform-actions/action) action.
 - On FreeBSD, install the latest Rust stable version with `rustup`.
 - Compare the current Rust version with ref. version.
-- If the Rust version changed, automatic commit of `rustc -vV` output in
-  `freebsd_rust_version.txt` file with [EndBug/add-and-commit](https://github.com/EndBug/add-and-commit) action.
+- If the Rust version changed, automatic Git commit of `rustc -vV` output in
+`freebsd_rust_version.txt`
