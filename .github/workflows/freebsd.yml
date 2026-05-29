@@ -59,7 +59,7 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git add freebsd_rust_version.txt
-        git commit -m "Update for FreeBSD Rust version ${{ env.RUST_VERSION }}\n\nAutomatic commit by job '${{ github.job }}' - run #${{ github.run_number }}\n"
+        git commit -m "Update for FreeBSD Rust version ${{ env.RUST_VERSION }}" -m "Automatic commit by job '${{ github.job }}' - run #${{ github.run_number }}"
         git tag "${{ env.RUST_VERSION }}"
         git push
         git push --tags
